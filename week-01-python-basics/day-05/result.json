@@ -1,0 +1,21 @@
+{
+    "summary": {
+        "total_rows": 10,
+        "total_quantity": 38,
+        "total_revenue": 970000
+    },
+    "by_region": {
+        "Москва": {
+            "quantity": 20,
+            "revenue": 394000
+        },
+        "СПб": {
+            "quantity": 5,
+            "revenue": 186000
+        },
+        "Казань": {
+            "quantity": 13,
+            "revenue": 390000
+        }
+    }
+}

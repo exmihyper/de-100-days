@@ -1,0 +1,6 @@
+{
+    "input_file": "sales.csv",
+    "output_file": "result.json",
+    "min_quantity": 2,
+    "report_fields": ["product", "quantity", "revenue", "region"]
+}
