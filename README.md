@@ -1,6 +1,6 @@
 # 100 Days of Data Engineering
 
-Старт: [сегодняшняя дата]
+Старт: [20.05.2026]
 Цель: Junior Data Engineer
 
 ## Стек
