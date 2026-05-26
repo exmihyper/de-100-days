@@ -1,0 +1,41 @@
+{
+    "source_file": "../day-05/sales.csv",
+    "total_rows": 10,
+    "columns": [
+        "date",
+        "product",
+        "quantity",
+        "price",
+        "region"
+    ],
+    "numeric_stats": {
+        "quantity": {
+            "sum": 38.0,
+            "avg": 3.8,
+            "min": 1.0,
+            "max": 10.0,
+            "count": 10
+        },
+        "price": {
+            "sum": 473000.0,
+            "avg": 47300.0,
+            "min": 3000.0,
+            "max": 120000.0,
+            "count": 10
+        }
+    },
+    "top_products": [
+        {
+            "product": "Мышь",
+            "total_quantity": 22
+        },
+        {
+            "product": "Клавиатура",
+            "total_quantity": 7
+        },
+        {
+            "product": "Ноутбук",
+            "total_quantity": 6
+        }
+    ]
+}
