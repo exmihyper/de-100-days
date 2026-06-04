@@ -1,0 +1,16 @@
+[project]
+name = "day16"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Nikita Nikitin",email = "hailtheeternity@gmail.com"}
+]
+requires-python = "^3.11"
+dependencies = [
+    "psycopg2-binary (>=2.9.12,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
