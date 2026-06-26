@@ -1,23 +1,4 @@
-# ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
-
-def get_number(prompt):
-    """Запрашивает у пользователя число с защитой от неверного ввода.
-    
-    Аргументы:
-        prompt (str): Текст подсказки, что показать пользователю
-    
-    Возвращает:
-        int: Целое число, которое ввёл пользователь
-    """
-    while True:
-        try:
-            return int(input(prompt))
-        except ValueError:
-            print("Ошибка: введите число!")
-
-
 def show_menu():
-    """Выводит главное меню калькулятора."""
     print("=== КАЛЬКУЛЯТОР ===")
     print("1. Сложение")
     print("2. Вычитание")
@@ -26,84 +7,66 @@ def show_menu():
     print("5. История операций")
     print("6. Выход")
 
+def get_number(prompt):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Ошибка: введите число!")
 
-# ========== ОСНОВНАЯ ЛОГИКА ==========
-
-def main():
-    """Главная функция: цикл меню, обработка выбора, история операций."""
-    
-    # Список для хранения истории операций
+def main():          
     history = []
-
+    
     while True:
         show_menu()
-
-        # Защищённый ввод пункта меню
         try:
             choice = int(input("Выберите действие (1-6): "))
+            print(f"Вы выбрали: {choice}")
         except ValueError:
             print("Ошибка: введите число от 1 до 6!")
-            continue  # Возврат в начало цикла
+            continue
 
-        # --- Сложение ---
         if choice == 1:
             a = get_number("Первое число: ")
-            b = get_number("Второе число: ")
-            result = a + b
-            print(f"Результат: {result}")
-            history.append(f"{a} + {b} = {result}")
-
-        # --- Вычитание ---
+            b = get_number("Второе число: ")      
+            print(f"Результат: {a + b}")
+            history.append(f"{a} + {b} = {a + b}")
+                
         elif choice == 2:
             a = get_number("Первое число: ")
             b = get_number("Второе число: ")
-            result = a - b
-            print(f"Результат: {result}")
-            history.append(f"{a} - {b} = {result}")
-
-        # --- Умножение ---
+            print(f"Результат: {a - b}")
+            history.append(f"{a} - {b} = {a - b}")
+            
         elif choice == 3:
             a = get_number("Первое число: ")
             b = get_number("Второе число: ")
-            result = a * b
-            print(f"Результат: {result}")
-            history.append(f"{a} * {b} = {result}")
-
-        # --- Деление ---
+            print(f"Результат: {a * b}")
+            history.append(f"{a} * {b} = {a * b}")
+            
         elif choice == 4:
             a = get_number("Первое число: ")
             b = get_number("Второе число: ")
-            if a == 0 or b == 0:
+            if b == 0:
                 print("Ошибка: деление на ноль!")
-                history.append(f"{a} / {b} = ОШИБКА (деление на ноль)")
             else:
-                result = a / b
-                print(f"Результат: {result}")
-                history.append(f"{a} / {b} = {result}")
-
-        # --- История ---
+                print(f"Результат: {a / b}")
+                history.append(f"{a} / {b} = {a / b}")
+                
         elif choice == 5:
             if len(history) == 0:
                 print("История пуста")
             else:
-                print("=== ИСТОРИЯ ОПЕРАЦИЙ ===")
                 for record in history:
                     print(record)
 
-        # --- Выход ---
         elif choice == 6:
-            print("До свидания!")
-            break  # Выход из цикла while, завершение программы
-
-        # --- Неверный пункт ---
+            print("Выход")
+            break        
+        
         else:
-            print("Ошибка: выберите число от 1 до 6!")
-
-
-# ========== ТОЧКА ВХОДА ==========
-
-# Эта конструкция означает: "Запусти main(), только если файл выполняется напрямую,
-# а не импортируется как модуль в другом скрипте"
-# __name__ — специальная переменная Python. Когда файл запущен напрямую, она равна "__main__"
+            print("Ошибка: выберите число от 1 до 6!") 
+            
+                   
 if __name__ == "__main__":
     main()
