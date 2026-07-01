@@ -27,6 +27,5 @@ def main():
             print("Меньше!")  
 
 
-
 if __name__ == "__main__":
     main()
