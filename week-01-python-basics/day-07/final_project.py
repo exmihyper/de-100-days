@@ -5,7 +5,6 @@ import os
 
 
 def read_csv(filename):
-    """Читает CSV-файл и возвращает заголовки и строки."""
     with open(filename, 'r', encoding='utf-8', newline='') as file:
         reader = csv.reader(file, delimiter=',')
         headers = next(reader)
@@ -14,7 +13,6 @@ def read_csv(filename):
 
 
 def is_number(value):
-    """Проверяет, является ли строка числом (int или float)."""
     value = value.strip()
     if not value:
         return False
@@ -31,7 +29,6 @@ def is_number(value):
 
 
 def get_numeric_columns(headers, rows):
-    """Находит все числовые столбцы и возвращает их индексы и имена."""
     numeric_cols = []
     
     for col_index, header in enumerate(headers):
@@ -50,7 +47,6 @@ def get_numeric_columns(headers, rows):
 
 
 def calculate_stats(rows, col_index):
-    """Считает статистику по одному столбцу."""
     values = []
     for row in rows:
         value = row[col_index]
@@ -70,17 +66,6 @@ def calculate_stats(rows, col_index):
 
 
 def get_top_products(rows, product_col, quantity_col):
-    """Группирует продажи по товарам и возвращает топ-N по количеству.
-    
-    Аргументы:
-        rows (list): строки данных
-        product_col (int): индекс столбца с названием товара
-        quantity_col (int): индекс столбца с количеством
-    
-    Возвращает:
-        list: список кортежей (товар, общее_количество), отсортированный по убыванию
-    """
-    # Словарь для суммирования количества по товарам
     product_totals = {}
     
     for row in rows:
@@ -94,14 +79,12 @@ def get_top_products(rows, product_col, quantity_col):
             else:
                 product_totals[product] = quantity
     
-    # Превращаем словарь в список кортежей и сортируем
     sorted_products = sorted(product_totals.items(), key=lambda x: x[1], reverse=True)
     
     return sorted_products
 
 
 def save_json(data, filename):
-    """Сохраняет данные в JSON-файл."""
     with open(filename, 'w', encoding='utf-8') as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
     print(f"\nОтчёт сохранён в '{filename}'")
@@ -125,14 +108,12 @@ def main():
     print(f"Столбцы: {headers}")
     print(f"Строк: {len(rows)}")
     
-    # Находим числовые столбцы
     numeric_cols = get_numeric_columns(headers, rows)
     
     if not numeric_cols:
         print("В файле нет числовых столбцов!")
         return
     
-    # Статистика по всем числовым столбцам
     print(f"\n=== СТАТИСТИКА ПО ЧИСЛОВЫМ СТОЛБЦАМ ===")
     
     all_stats = {}
@@ -147,8 +128,6 @@ def main():
         print(f"  Максимум: {col_stats['max']}")
         print(f"  Количество: {col_stats['count']}")
     
-    # Топ-3 товаров (если есть столбцы product и quantity)
-    # Ищем индексы столбцов по названиям
     product_col = None
     quantity_col = None
     
@@ -168,7 +147,6 @@ def main():
     else:
         print(f"\nСтолбцы 'product' и 'quantity' не найдены — пропускаем топ товаров.")
     
-    # Формируем итоговый отчёт
     report = {
         'source_file': filename,
         'total_rows': len(rows),
@@ -177,7 +155,6 @@ def main():
         'top_products': [{'product': p, 'total_quantity': q} for p, q in top_products[:3]]
     }
     
-    # Сохраняем в JSON
     output_file = 'report.json'
     save_json(report, output_file)
 
