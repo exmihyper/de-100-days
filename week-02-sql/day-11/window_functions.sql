@@ -1,42 +1,5 @@
--- День 11: Оконные функции
--- 1. ROW_NUMBER: нумерация строк по зарплате
-SELECT ROW_NUMBER() OVER (
-        ORDER BY salary DESC
-    ) AS row_num,
-    name,
-    department,
-    salary
-FROM employees;
--- 2. PARTITION BY: нумерация внутри отделов
-SELECT ROW_NUMBER() OVER (
-        PARTITION BY department
-        ORDER BY salary DESC
-    ) AS row_num,
-    name,
-    department,
-    salary
-FROM employees;
--- 3. RANK vs DENSE_RANK
-SELECT RANK() OVER (
-        ORDER BY salary DESC
-    ) AS rank,
-    DENSE_RANK() OVER (
-        ORDER BY salary DESC
-    ) AS dense_rank,
-    name,
-    salary
-FROM employees;
--- 4. LAG и LEAD
-SELECT name,
-    salary,
-    LAG(salary) OVER (
-        ORDER BY salary DESC
-    ) AS previous_salary,
-    LEAD(salary) OVER (
-        ORDER BY salary DESC
-    ) AS next_salary
-FROM employees;
--- Задача 1: Топ-3 по зарплате
+-- Задача 1
+-- Выведи топ-3 сотрудников с самой высокой зарплатой. Используй ROW_NUMBER() или RANK() и WHERE с подзапросом.
 SELECT *
 FROM (
         SELECT name,
@@ -47,7 +10,8 @@ FROM (
         FROM employees
     ) ranked
 WHERE rnk <= 3;
--- Задача 2: Отклонение от средней по отделу
+-- Задача 2
+-- Для каждого сотрудника выведи разницу между его зарплатой и средней зарплатой по его отделу. Используй AVG() OVER (PARTITION BY department)
 SELECT name,
     department,
     salary,
@@ -56,7 +20,8 @@ SELECT name,
 FROM employees
 ORDER BY department,
     salary DESC;
--- Задача 3: Самый дорогой заказ
+-- Задача 3
+-- Найди сотрудника, который сделал самый дорогой заказ. Выведи его имя, название продукта и сумму заказа. Используй ROW_NUMBER() и JOIN.
 SELECT name,
     product,
     amount
