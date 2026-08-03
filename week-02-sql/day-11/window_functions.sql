@@ -10,6 +10,9 @@ FROM (
         FROM employees
     ) ranked
 WHERE rnk <= 3;
+
+
+
 -- Задача 2
 -- Для каждого сотрудника выведи разницу между его зарплатой и средней зарплатой по его отделу. Используй AVG() OVER (PARTITION BY department)
 SELECT name,
@@ -20,6 +23,9 @@ SELECT name,
 FROM employees
 ORDER BY department,
     salary DESC;
+
+
+    
 -- Задача 3
 -- Найди сотрудника, который сделал самый дорогой заказ. Выведи его имя, название продукта и сумму заказа. Используй ROW_NUMBER() и JOIN.
 SELECT name,
