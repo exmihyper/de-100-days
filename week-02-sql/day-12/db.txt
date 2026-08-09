@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS big_sales CASCADE;
+
+
+
+CREATE TABLE big_sales (
+    id SERIAL PRIMARY KEY,
+    product VARCHAR(50),
+    region VARCHAR(30),
+    amount INTEGER,
+    sale_date DATE
+);
+
+
+
+INSERT INTO big_sales (product, region, amount, sale_date)
+SELECT
+    (ARRAY['Ноутбук', 'Монитор', 'Мышь', 'Клавиатура', 'Принтер', 'Сервер', 'Флешка', 'Бумага'])[floor(random() * 8 + 1)],
+    (ARRAY['Москва', 'СПб', 'Казань', 'Новосибирск', 'Екатеринбург'])[floor(random() * 5 + 1)],
+    floor(random() * 500000 + 100)::INTEGER,
+    CURRENT_DATE - (random() * 730)::INTEGER
+FROM generate_series(1, 100000);
