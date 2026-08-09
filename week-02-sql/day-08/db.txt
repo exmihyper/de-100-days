@@ -1,0 +1,52 @@
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS employees CASCADE;
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(30),
+    salary INTEGER,
+    hire_date DATE
+);
+
+
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    employee_id INTEGER REFERENCES employees(id),
+    product VARCHAR(50),
+    amount INTEGER,
+    order_date DATE
+);
+
+
+
+INSERT INTO employees (name, department, salary, hire_date) VALUES
+('Анна', 'IT', 120000, '2020-03-15'),
+('Борис', 'IT', 95000, '2021-07-01'),
+('Виктор', 'HR', 70000, '2019-11-20'),
+('Галина', 'Finance', 110000, '2018-05-10'),
+('Дмитрий', 'IT', 98000, '2022-01-15'),
+('Елена', 'HR', 75000, '2020-09-01'),
+('Жанна', 'Finance', 105000, '2019-03-20'),
+('Игорь', 'IT', 130000, '2017-06-01'),
+('Ксения', 'HR', 68000, '2023-02-10'),
+('Леонид', 'Finance', 115000, '2016-11-05');
+
+
+
+INSERT INTO orders (employee_id, product, amount, order_date) VALUES
+(1, 'Ноутбук', 120000, '2025-01-10'),
+(1, 'Монитор', 45000, '2025-01-10'),
+(2, 'Клавиатура', 7000, '2025-01-12'),
+(2, 'Мышь', 3000, '2025-01-12'),
+(4, 'Принтер', 25000, '2025-01-15'),
+(5, 'Ноутбук', 120000, '2025-01-16'),
+(5, 'Монитор', 45000, '2025-01-16'),
+(8, 'Сервер', 350000, '2025-01-18'),
+(1, 'Флешка', 2000, '2025-01-20'),
+(10, 'Бумага', 1500, '2025-01-21'),
+(NULL, 'Кофе', 500, '2025-01-22'),
+(3, 'Канцелярия', 3000, '2025-01-22');
