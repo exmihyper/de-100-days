@@ -1,9 +1,5 @@
--- ==========================================
--- День 14: Финальный проект Недели SQL
--- ==========================================
-
--- Запрос 1: Лидеры продаж по категориям
--- Находит товар с максимальной выручкой в каждой категории
+-- Запрос 1
+-- Для каждой категории найди товар, который принёс больше всего денег (SUM(quantity * price_at_order)).
 WITH ranked AS (
     SELECT 
         c.name AS category,
@@ -19,7 +15,10 @@ SELECT category, product, total_revenue
 FROM ranked
 WHERE rn = 1;
 
--- Запрос 2: Активные vs неактивные пользователи
+
+
+-- Запрос 2
+-- Выведи ВСЕХ пользователей. Добавь столбец: 'active' — если сделал хотя бы один заказ 'inactive' — если заказов нет.
 SELECT 
     u.name,
     CASE 
@@ -27,10 +26,12 @@ SELECT
         ELSE 'inactive'
     END AS status
 FROM users u
-LEFT JOIN orders o ON u.id = o.user_id
-GROUP BY u.name, status;
+LEFT JOIN orders o ON u.id = o.user_id;
 
--- Запрос 3: Средний чек по статусам заказов
+
+
+-- Запрос 3
+-- Для каждого статуса посчитай: Количество заказов, Среднюю сумму заказа (AVG(total_amount)), Общую сумму, Только для статусов, где больше одного заказа (HAVING).
 SELECT 
     status,
     COUNT(*) AS order_count,
@@ -40,7 +41,10 @@ FROM orders
 GROUP BY status
 HAVING COUNT(*) > 1;
 
--- Запрос 4: Товары с низким запасом и их продажи
+
+
+-- Запрос 4
+-- Выведи товары, у которых stock < 50. Добавь столбец total_sold (SUM quantity из order_items). Если товар не продавался — показать 0.
 SELECT 
     p.name,
     p.stock,
@@ -51,7 +55,10 @@ WHERE p.stock < 50
 GROUP BY p.name, p.stock
 ORDER BY p.stock ASC;
 
--- Запрос 5: Месячная динамика продаж
+
+
+-- Запрос 5
+-- Посчитай сумму продаж (total_amount) по месяцам. Выведи месяц (в формате YYYY-MM) и сумму. Отсортируй по месяцу.
 SELECT 
     TO_CHAR(order_date, 'YYYY-MM') AS month,
     SUM(total_amount) AS total_sales
@@ -59,7 +66,10 @@ FROM orders
 GROUP BY TO_CHAR(order_date, 'YYYY-MM')
 ORDER BY month;
 
--- Запрос 6: Чеки с детализацией
+
+
+-- Запрос 6
+-- Для каждого заказа выведи: id заказа, Имя покупателя, Список товаров через запятую (в одном столбце), Общую сумму.
 SELECT 
     o.id AS order_id,
     u.name AS customer,
