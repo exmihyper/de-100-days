@@ -1,5 +1,6 @@
 import psycopg2
 
+
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
@@ -8,9 +9,10 @@ conn = psycopg2.connect(
     password="de_pass"
 )
 
+
 cur = conn.cursor()
 
-# Топ-3 пользователей по сумме заказов (таблицы users + orders)
+
 cur.execute("""
     SELECT u.name, SUM(o.total_amount) AS total_spent
     FROM users u
@@ -20,11 +22,14 @@ cur.execute("""
     LIMIT 3;
 """)
 
+
 rows = cur.fetchall()
 
-print("=== ТОП-3 ПОКУПАТЕЛЕЙ ПО СУММЕ ЗАКАЗОВ ===")
+
+print("=== СОТРУДНИКИ ПО ОТДЕЛАМ ===")
 for row in rows:
-    print(f"{row[0]}: {row[1]} руб.")
+    print(f"{row[0]}: {row[1]} чел.")
+
 
 cur.close()
 conn.close()
