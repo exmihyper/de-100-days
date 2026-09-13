@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: day21-postgres
+    environment:
+      POSTGRES_USER: de_user
+      POSTGRES_PASSWORD: de_pass
+      POSTGRES_DB: de_db
+    ports:
+      - "5433:5432"   
+    volumes:
+      - pgdata_day21:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U de_user -d de_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  etl:
+    build: .
+    container_name: day21-etl
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres      
+      DB_PORT: 5432
+      DB_NAME: de_db
+      DB_USER: de_user
+      DB_PASS: de_pass
+
+volumes:
+  pgdata_day21:
