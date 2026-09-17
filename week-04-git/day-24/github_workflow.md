@@ -16,6 +16,7 @@
 - `git push -u origin branch-name` — отправить ветку на GitHub и связать с локальной
 - `git branch -r` — показать удалённые ветки
 
+
 ## Workflow в команде
 
 1. Создать ветку от `main`
