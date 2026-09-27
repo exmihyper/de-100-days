@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "total_revenue": 345000.0,
+    "total_orders": 8,
+    "avg_check": 43125.0
+  },
+  "top_customers": [
+    {
+      "name": "Анна",
+      "revenue": 125000.0
+    },
+    {
+      "name": "Дмитрий",
+      "revenue": 80000.0
+    },
+    {
+      "name": "Игорь",
+      "revenue": 80000.0
+    }
+  ],
+  "top_products": [
+    {
+      "name": "Мышь",
+      "quantity": 7.0
+    },
+    {
+      "name": "Ноутбук",
+      "quantity": 3.0
+    },
+    {
+      "name": "Клавиатура",
+      "quantity": 2.0
+    }
+  ]
+}
