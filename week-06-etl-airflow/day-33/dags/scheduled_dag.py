@@ -91,6 +91,7 @@ with DAG(
         task_id='quality_fail',
         python_callable=on_quality_fail,
     )
-
+    
+    
     task_extract >> [task_clean, task_enrich] >> task_load >> task_check
     task_check >> [task_ok, task_fail]
